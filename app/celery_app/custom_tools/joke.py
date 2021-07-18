@@ -6,6 +6,3 @@ def get_random_joke():
     jokes = f.read().split("\n\n")
     i = randint(0, len(jokes))
     return jokes[i]
-
-
-get_random_joke()
