@@ -19,18 +19,10 @@ def get_following_items(db: redis.Redis, chat_id: int):
     if data is not None:
         data = json.loads(data)
         following_items = data.get("following_items")
-        return following_items
-    else:
-        return []
-
-
-def set_task_id_in_user_state(db: redis.Redis, chat_id: int, task_id):
-    key = storage.generate_key(chat_id, chat_id, "data")
-    data = db.get(key)
-    if data is not None:
-        data = json.loads(data)
-        data.update({"notification_task_id": task_id})
-        db.set(key, task_id)
+        if following_items:
+            return following_items
+        else:
+            return []
 
 
 def send_message(chat_id, text, reply_markup=None):

@@ -22,8 +22,6 @@ async def confirm_reaction_on_notification(
     item_id = callback_query.data.split()[1]
     async with state.proxy() as data:
         following_items = data.get("following_items")
-        task_id = data.get("notification_task_id")
-    revoke(task_id, terminate=True)
     try:
         item_index = [elem["id"] for elem in following_items].index(item_id)
         item = following_items.pop(item_index)
